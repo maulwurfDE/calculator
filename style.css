@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .menu-container {
+    color: #fff;
+    background-color: white;  /* #5995DA Blue */
+    padding: 20px 0;
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .menu {
+    border: 1px solid grey;  /* For debugging */
+    width: 325px;
+    height: 500px;
+    display: flex;
+    flex-wrap:wrap;
+
+  }
+
+.display:hover, .display {width: 300px; 
+    height:85px;
+align-self: center;
+margin-left: 8px;
+font-size: 56px;
+background-color: white;}
+
+
+
+ div div div {
+   width: 70px;
+   height: 66px;
+   border: 1px solid #f1f3f4; /* red; */
+    margin: 4.5px 4.5px;
+    color: black;
+    border-radius: 4px;
+    line-height: 66px;
+    font-size: 28.57px;
+    font-family:arial,sans-serif;
+    text-align: center;
+    background: #dfe1e5;
+    cursor: pointer;
+  }
+  
+  div div div:hover {
+      background-color: #d7d9dd;
+      border-color: #d7d9dd;
+  }
+  
+  .zero, .one, .two, .dot, .three, .four, .five, .six, .seven, .eight, .nine {
+      background-color: #f1f3f4;
+  }
+
+  .zero:hover, .one:hover, .two:hover, .dot:hover, .three:hover, .four:hover, .five:hover, .six:hover, .seven:hover, .eight:hover, .nine:hover {
+    background-color:#e8eaeb;
+    border-color: #e8eaeb;
+}
+
+
+  .equal {
+      background-color: #4285f4;
+      border-color: #4285f4;
+      color: #fff;
+
+  }
+ 
+  .equal:hover {
+      background-color: #4d8bf1;
+      border-color: #4d8bf1;
+  }
