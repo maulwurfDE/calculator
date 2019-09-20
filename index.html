@@ -8,27 +8,27 @@
 
         <div class='menu-container'>
             <div class='menu'>
-                <div class="display"><div class="input">0</div></div>
-                <div class="reset">AC</div>
-                <div class="back">⌫</div>
-                <div class="potenz">x&sup2;</div>
-                <div class="divide">÷</div>
-                <div class="seven">7</div>
-                <div class="eight">8</div>
-                <div class="nine">9</div>
-                <div class="multiply">×</div>
-                <div class="four">4</div>
-                <div class="five">5</div>
-                <div class="six">6</div>
-                <div class="subtract">-</div>
-                <div class="one">1</div>
-                <div class="two">2</div>
-                <div class="three">3</div>
-                <div class="add">+</div>
-                <div class="factorial">x!</div>
-                <div class="zero">0</div>
-                <div class="dot">.</div>
-                <div class="equal"><strong>=</strong></div>
+                <div id="display"><div id="input">0</div></div>
+                <div id="reset" onclick="reset2()">AC</div>
+                <div id="back">⌫</div>
+                <div id="potenz" onclick="interpreter('^')">x<sup id="small">y</sup></div>
+                <div id="divide" onclick="interpreter('/')"> ÷ </div>
+                <div id="seven" onclick="interpreter('7')">7</div>
+                <div id="eight" onclick="interpreter('8')">8</div>
+                <div id="nine" onclick="interpreter('9')">9</div>
+                <div id="multiply" onclick="interpreter('*')">×</div>
+                <div id="four" onclick="interpreter('4')">4</div>
+                <div id="five" onclick="interpreter('5')">5</div>
+                <div id="six" onclick="interpreter('6')">6</div>
+                <div id="subtract" onclick="interpreter('-')">-</div>
+                <div id="one" onclick="interpreter('1')">1</div>
+                <div id="two" onclick="interpreter('2')">2</div>
+                <div id="three" onclick="interpreter('3')">3</div>
+                <div id="add" onclick="interpreter('+')">+</div>
+                <div id="factorial" onclick="interpreter('!')">x!</div>
+                <div id="zero" onclick="interpreter('0')">0</div>
+                <div id="dot" onclick="interpreter('.')">.</div>
+                <div id="equal" onclick="interpreter('=')"><strong>=</strong></div>
                 </div></div>
 
 

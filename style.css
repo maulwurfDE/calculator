@@ -21,14 +21,16 @@
 
   }
 
-.display:hover, .display {width: 300px; 
+#display:hover, #display {width: 300px; 
     height:85px;
 align-self: center;
 margin-left: 8px;
 font-size: 56px;
 background-color: white;
 align-items: flex-end;
-display: flex;}
+display: flex;
+cursor: default; 
+justify-content: space-between;}
 
 
 
@@ -45,6 +47,11 @@ display: flex;}
     text-align: center;
     background: #dfe1e5;
     cursor: pointer;
+    -webkit-user-select: none; /* Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+/Edge */
+user-select: none; /* Standard */
+
   }
   
   div div div:hover {
@@ -52,34 +59,40 @@ display: flex;}
       border-color: #d7d9dd;
   }
   
-  .zero, .one, .two, .dot, .three, .four, .five, .six, .seven, .eight, .nine {
+  #zero, #one, #two, #dot, #three, #four, #five, #six, #seven, #eight, #nine {
       background-color: #f1f3f4;
   }
 
-  .zero:hover, .one:hover, .two:hover, .dot:hover, .three:hover, .four:hover, .five:hover, .six:hover, .seven:hover, .eight:hover, .nine:hover {
+  #zero:hover, #one:hover, #two:hover, #dot:hover, #three:hover, #four:hover, #five:hover, #six:hover, #seven:hover, #eight:hover, #nine:hover {
     background-color:#e8eaeb;
     border-color: #e8eaeb;
 }
 
 
-  .equal {
+  #equal {
       background-color: #4285f4;
       border-color: #4285f4;
       color: #fff;
 
   }
  
-  .equal:hover {
+  #equal:hover {
       background-color: #4d8bf1;
       border-color: #4d8bf1;
   }
 
-  .input {
+  #input {
       background: white;
       border:none;
       height: 50px;
-      width: 40px;
-      margin-left: auto;
+       flex: 1;
+       text-align: right;
+    
      }
 
-      .input:hover {background: white;}
+      #input:hover {background: white;
+    cursor: default;}
+
+    #small {font-size: 15px;
+    position:absolute;
+top: 117px;}
