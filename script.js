@@ -94,7 +94,6 @@ let dotBefore = 0;
 let alertCounter = 0;
 
 function interpreter(string) {
-    console.log(operatorBefore);
     if (document.querySelector('#input').innerHTML === "0" && string === ".") {
 
         document.querySelector('#input').innerHTML = "0.";
@@ -105,11 +104,15 @@ function interpreter(string) {
         document.querySelector('#input').innerHTML = string; }
 
         
-    else if ((dotBefore === 1 || operatorBefore === 1) && (string === "+" || string === "!" || string === "-" || 
-        string === "*" || string === "/" || string === "^" || string === ".")) {
-          document.querySelector('#input').innerHTML = document.querySelector('#input').innerHTML.replace(/.$/,string);
+    else if ((dotBefore === 1 || operatorBefore === 1) && 
+            (string === "+" || string === "!" || string === "-" || 
+            string === "*" || string === "/" || string === "^" || string === ".")) {
+          document.querySelector('#input').innerHTML = document.querySelector('#input').
+          innerHTML.replace(/.$/,string);
          }
-  
+  else if (string === "=" && (store1 === "" || store2 === "" || store2 === undefined)) {
+
+  }
     
     else {
         document.querySelector('#input').innerHTML += string;
@@ -118,8 +121,6 @@ function interpreter(string) {
 
     if(string === "!") {
 
-      
-        
         document.querySelector('#input').innerHTML = operate("!",parseFloat(store1),parseFloat(store2));
         store1 = document.querySelector('#input').innerHTML;
         operator = "";
@@ -130,7 +131,7 @@ function interpreter(string) {
     if(string === "+" || string === "-" || 
     string === "*" || string === "/" || string === "^" || string === "=") {
 
-    
+  //  console.log("place1: " + operatorBefore);
      if (operatorBefore === 0) {
         if(operator !== "" && store1 !== "" && store2 !== "" && store1 !== "." && store2 !== ".") {
           
@@ -141,24 +142,28 @@ function interpreter(string) {
             else {
             document.querySelector('#input').innerHTML = operate(operator,parseFloat(store2),parseFloat(store1));
             store1 = document.querySelector('#input').innerHTML;
-            reset = 1;
+            
             if (string === "=") {}
-            else document.querySelector('#input').innerHTML += string;
+            else {document.querySelector('#input').innerHTML += string;
+                reset = 1;}
             }
          }
         
-     // if (operator === "") {
+     if (string !== "=") {
         store2 = store1;
         store1 = ""; 
-     
+        }
+    else if (string === "=") { store2 = "";}
         operator = string;
-        
+         console.log("store1: " + store1);
+         console.log("store2: " + store2);
      // }
 
 
         }
         if (string === "=") {}
         else operatorBefore = 1;
+        console.log("place2: " + operatorBefore);
     }
 
   
@@ -166,7 +171,7 @@ function interpreter(string) {
 //    document.querySelector('#input').innerHTML = string;
     store1 += string;
     reset = 0;
-    console.log(store1);
+    console.log("hello2:" + store1);
     operatorBefore = 0;
     }
 
@@ -176,7 +181,7 @@ function interpreter(string) {
     }
 
     else {store1 += string;
-        console.log(store1);
+        console.log("hello: " + store1);
         operatorBefore = 0;
     }
     
