@@ -91,6 +91,7 @@ let store2;
 let reset;
 let operatorBefore = 0;
 let dotBefore = 0;
+let alertCounter = 0;
 
 function interpreter(string) {
     console.log(operatorBefore);
@@ -132,12 +133,18 @@ function interpreter(string) {
     
      if (operatorBefore === 0) {
         if(operator !== "" && store1 !== "" && store2 !== "" && store1 !== "." && store2 !== ".") {
-            
+          
+            if(operator === "/" && store1 === "0") {
+                reset2();
+                alert("You can't do that");
+            }
+            else {
             document.querySelector('#input').innerHTML = operate(operator,parseFloat(store2),parseFloat(store1));
             store1 = document.querySelector('#input').innerHTML;
             reset = 1;
             if (string === "=") {}
             else document.querySelector('#input').innerHTML += string;
+            }
          }
         
      // if (operator === "") {
@@ -150,7 +157,8 @@ function interpreter(string) {
 
 
         }
-        operatorBefore = 1;
+        if (string === "=") {}
+        else operatorBefore = 1;
     }
 
   
@@ -179,6 +187,37 @@ if (operatorBefore === 1) {
 if (string === ".") {dotBefore = 1;}
 else {dotBefore = 0;}
 
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+  }
+
+function decimalPlaces(num) {
+    var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+    if (!match) { return 0; }
+    return Math.max(
+         0,
+         // Number of digits right of decimal point.
+         (match[1] ? match[1].length : 0)
+         // Adjust for scientific notation.
+         - (match[2] ? +match[2] : 0));
+  }
+
+if (decimalPlaces(document.querySelector('#input').innerHTML) > 8) {
+    document.querySelector('#input').innerHTML = round(document.querySelector('#input').innerHTML, 8)
+
+
+};
+
+if(document.querySelector('#input').innerHTML.length > 13 && alertCounter === 0){
+
+    alert("You've reached the limits of this calculator. Please note that calculations with more digits could be buggy.")
+    alertCounter = 1;
+}
+
+ //   if(document.querySelector('#input').innerHTML.length > 16) {
+   //     document.querySelector('#input').innerHTML = parseFloat(document.querySelector('#input').innerHTML).toExponential();
+      
+  //  }
 }
 
 
@@ -189,6 +228,7 @@ function reset2() {
     reset = 0;
     dotBefore = 0;
     document.querySelector('#input').innerHTML = "0";
+    alertCounter = 0;
 
 }
 
@@ -197,3 +237,4 @@ function backspace() {
     document.querySelector('#input').innerHTML = document.querySelector('#input').innerHTML.slice(0, -1);
     store1 = store1.slice(0, -1);
 }
+
