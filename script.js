@@ -202,17 +202,17 @@ function decimalPlaces(num) {
          - (match[2] ? +match[2] : 0));
   }
 
-if (decimalPlaces(document.querySelector('#input').innerHTML) > 8) {
-    document.querySelector('#input').innerHTML = round(document.querySelector('#input').innerHTML, 8)
+// if (decimalPlaces(document.querySelector('#input').innerHTML) > 7) {
+//    document.querySelector('#input').innerHTML = round(document.querySelector('#input').innerHTML, 8)
 
 
-};
+// };
 
-if(document.querySelector('#input').innerHTML.length > 13 && alertCounter === 0){
+// if(document.querySelector('#input').innerHTML.length > 13 && alertCounter === 0){
 
-    alert("You've reached the limits of this calculator. Please note that calculations with more digits could be buggy.")
-    alertCounter = 1;
-}
+//    alert("You've reached the limits of this calculator. Please note that calculations with more digits could be buggy.")
+//    alertCounter = 1;
+// }
 
  //   if(document.querySelector('#input').innerHTML.length > 16) {
    //     document.querySelector('#input').innerHTML = parseFloat(document.querySelector('#input').innerHTML).toExponential();
