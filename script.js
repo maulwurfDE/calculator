@@ -115,8 +115,19 @@ function interpreter(string) {
     }
 
 
-    if(string === "+" || string === "!" || string === "-" || 
-    string === "*" || string === "/" || string === "^") {
+    if(string === "!") {
+
+      
+        
+        document.querySelector('#input').innerHTML = operate("!",parseFloat(store1),parseFloat(store2));
+        store1 = document.querySelector('#input').innerHTML;
+        operator = "";
+        store2 = store1;
+        store1 = "";
+    }
+
+    if(string === "+" || string === "-" || 
+    string === "*" || string === "/" || string === "^" || string === "=") {
 
     
      if (operatorBefore === 0) {
@@ -125,7 +136,8 @@ function interpreter(string) {
             document.querySelector('#input').innerHTML = operate(operator,parseFloat(store2),parseFloat(store1));
             store1 = document.querySelector('#input').innerHTML;
             reset = 1;
-            document.querySelector('#input').innerHTML += string;
+            if (string === "=") {}
+            else document.querySelector('#input').innerHTML += string;
          }
         
      // if (operator === "") {
@@ -180,3 +192,8 @@ function reset2() {
 
 }
 
+function backspace() {
+
+    document.querySelector('#input').innerHTML = document.querySelector('#input').innerHTML.slice(0, -1);
+    store1 = store1.slice(0, -1);
+}
