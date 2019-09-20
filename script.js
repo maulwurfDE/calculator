@@ -104,6 +104,7 @@ function interpreter(string) {
         document.querySelector('#input').innerHTML = string; }
 
         
+        
     else if ((dotBefore === 1 || operatorBefore === 1) && 
             (string === "+" || string === "!" || string === "-" || 
             string === "*" || string === "/" || string === "^" || string === ".")) {
@@ -111,6 +112,10 @@ function interpreter(string) {
           innerHTML.replace(/.$/,string);
          }
   else if (string === "=" && (store1 === "" || store2 === "" || store2 === undefined)) {
+
+  }
+
+  else if(string === '.' && store1.search(/\./) >= 0) {
 
   }
     
@@ -140,7 +145,14 @@ function interpreter(string) {
                 alert("You can't do that");
             }
             else {
+            
+            
             document.querySelector('#input').innerHTML = operate(operator,parseFloat(store2),parseFloat(store1));
+           
+            if (decimalPlaces(document.querySelector('#input').innerHTML) > 7) {
+                document.querySelector('#input').innerHTML = round(document.querySelector('#input').innerHTML, 7) }
+            
+           
             store1 = document.querySelector('#input').innerHTML;
             
             if (string === "=") {}
@@ -180,6 +192,8 @@ function interpreter(string) {
  operatorBefore = 0;
     }
 
+    else if (string === '.' && store1.search(/\./) >= 0) {}
+    
     else {store1 += string;
         console.log("hello: " + store1);
         operatorBefore = 0;
@@ -207,8 +221,6 @@ function decimalPlaces(num) {
          - (match[2] ? +match[2] : 0));
   }
 
-// if (decimalPlaces(document.querySelector('#input').innerHTML) > 7) {
-//    document.querySelector('#input').innerHTML = round(document.querySelector('#input').innerHTML, 8)
 
 
 // };
