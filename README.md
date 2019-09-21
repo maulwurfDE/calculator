@@ -1,0 +1,1 @@
+In this project I have contructed a calculator. To do this, I needed to demonstrate my Javascript, CSS and html skills. 
