@@ -193,7 +193,7 @@ function interpreter(string) {
     }
 
     else if (string === '.' && store1.search(/\./) >= 0) {}
-    
+
     else {store1 += string;
         console.log("hello: " + store1);
         operatorBefore = 0;
