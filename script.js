@@ -1,3 +1,6 @@
+
+document.getElementById("new").value = "0";
+
 function add(a, b) {
 
     console.log("hi, I'm here")

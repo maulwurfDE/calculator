@@ -70,7 +70,7 @@ user-select: none; /* Standard */
     border-color: #e8eaeb;
 }
 div div div:active {
-    border-color: #bdc1c6 !important;
+    outline: 1px #bdc1c6 solid;
   }
 
 #reset:active, #back:active, #potenz:active, #divide:active, #multiply:active, #subtract:active, #add:active, #factorial:active {
