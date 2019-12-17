@@ -1,5 +1,64 @@
 
-document.getElementById("new").value = "0";
+
+function addEvent(elem, event, fn){
+    if(elem.addEventListener){
+      elem.addEventListener(event, fn, false);
+    }else{
+      elem.attachEvent("on" + event,
+      function(){ return(fn.call(elem, window.event)); });
+    }}
+    var element = document.getElementById('new');
+    
+    addEvent(element,'focus',function(){
+      var that = this;
+      setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
+    });
+
+    addEvent(element,'click',function(){
+        var that = this;
+        setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
+      });
+
+
+let inputField = document.getElementById("new");
+inputField.value = "0";
+
+let key = false;
+inputField.addEventListener('keyup',function() {
+   
+    keyCode = event.keyCode;
+    console.log(keyCode);
+    if(keyCode === 8) {
+        store1 = store1.slice(0, -1);
+    }
+
+    else if(keyCode === 13) {
+
+        interpreter('=');     
+
+    }
+
+    else if (keyCode === 16 || keyCode === 27 || keyCode === 3 || keyCode === 9 || keyCode === 12 || keyCode === 17 || keyCode === 18 || keyCode === 19 || keyCode === 20 || keyCode === 21 || keyCode === 25 || keyCode === 27 || keyCode === 28 || keyCode === 29 || keyCode === 32 || keyCode === 33 || keyCode === 34 || keyCode === 35 || keyCode === 36 || keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40 ||  keyCode === 41 || keyCode === 42 || keyCode === 43 || keyCode === 44 || keyCode === 45 || keyCode === 46 || keyCode === 47 || keyCode === 91 || keyCode === 92 || keyCode === 93 || keyCode === 95 || keyCode === 112 || keyCode === 113 || keyCode === 114 || keyCode === 115 ||  keyCode === 116 ||
+        keyCode === 117 || keyCode === 118 || keyCode === 119 || keyCode === 120 || keyCode === 121 || keyCode === 122 || keyCode === 123 || keyCode === 124 || keyCode === 125 || keyCode === 126 || keyCode === 127 || keyCode === 128 || keyCode === 129 || keyCode === 130 || keyCode === 131 || keyCode === 132 || keyCode === 133 || keyCode === 134 || keyCode === 135 ||
+        keyCode === 144 || keyCode === 145 || keyCode === 151 || keyCode === 166 || keyCode === 167 || keyCode === 168 || keyCode === 172 || keyCode === 174 || keyCode === 175 || keyCode === 176 ||
+        keyCode === 177 || keyCode === 178 || keyCode === 179 || keyCode === 180 || keyCode === 181 || keyCode === 182 || keyCode === 183 || keyCode === 224 || keyCode === 225 ||
+        keyCode === 230 || keyCode === 233 || keyCode === 234 || keyCode === 235 || keyCode === 240 || keyCode === 242 || keyCode === 243 || keyCode === 244 || keyCode === 251 || keyCode === 255) {
+            
+        }
+
+    else if (/^[0-9*\/+^!\-.]$/.test(this.value[this.value.length-1])) {
+        console.log(this.value[this.value.length-1])
+        key = true;
+        if (inputField.value[0] === "0") inputField.value = this.value[1];
+            interpreter(this.value[this.value.length-1])
+    }
+
+    else if (/^[0-9*\/+^!\-.]$/.test(this.value[this.value.length-1]) === false)
+            inputField.value = inputField.value.slice(0, -1);
+
+    
+})
+
 
 function add(a, b) {
 
@@ -85,9 +144,7 @@ function operate(operator,a,b) {
     else { console.log("ERROR")}
 }
 
-// document.getElementById("one").onclick = interpreter;
 
-// document.getElementById("two").onclick = interpreter;
 let store1 = "";
 let operator = "";
 let store2;
@@ -97,21 +154,22 @@ let dotBefore = 0;
 let alertCounter = 0;
 
 function interpreter(string) {
-    if (document.querySelector('#input').innerHTML === "0" && string === ".") {
+    if (inputField.value === "0" && string === ".") {
 
-        document.querySelector('#input').innerHTML = "0.";
+        inputField.value = "0.";
 
     }
 
-    else if (document.querySelector('#input').innerHTML === "0") {
-        document.querySelector('#input').innerHTML = string; }
+    else if (inputField.value === "0") {
+        console.log("nonono");
+        inputField.value = string; }
 
         
         
     else if ((dotBefore === 1 || operatorBefore === 1) && 
             (string === "+" || string === "!" || string === "-" || 
             string === "*" || string === "/" || string === "^" || string === ".")) {
-          document.querySelector('#input').innerHTML = document.querySelector('#input').
+          inputField.value = document.querySelector('#input').
           innerHTML.replace(/.$/,string);
          }
   else if (string === "=" && (store1 === "" || store2 === "" || store2 === undefined)) {
@@ -122,15 +180,15 @@ function interpreter(string) {
 
   }
     
-    else {
-        document.querySelector('#input').innerHTML += string;
+    else if (key === false) {
+        inputField.value += string;
     }
-
+key = false;
 
     if(string === "!") {
 
-        document.querySelector('#input').innerHTML = operate("!",parseFloat(store1),parseFloat(store2));
-        store1 = document.querySelector('#input').innerHTML;
+        inputField.value = operate("!",parseFloat(store1),parseFloat(store2));
+        store1 = inputField.value;
         operator = "";
         store2 = store1;
         store1 = "";
@@ -150,16 +208,16 @@ function interpreter(string) {
             else {
             
             
-            document.querySelector('#input').innerHTML = operate(operator,parseFloat(store2),parseFloat(store1));
+            inputField.value = operate(operator,parseFloat(store2),parseFloat(store1));
            
-            if (decimalPlaces(document.querySelector('#input').innerHTML) > 7) {
-                document.querySelector('#input').innerHTML = round(document.querySelector('#input').innerHTML, 7) }
+            if (decimalPlaces(inputField.value) > 7) {
+                inputField.value = round(inputField.value, 7) }
             
            
-            store1 = document.querySelector('#input').innerHTML;
+            store1 = inputField.value;
             
             if (string === "=") {}
-            else {document.querySelector('#input').innerHTML += string;
+            else {inputField.value += string;
                 reset = 1;}
             }
          }
@@ -183,7 +241,7 @@ function interpreter(string) {
 
   
     else if (reset === 1) {
-//    document.querySelector('#input').innerHTML = string;
+//    inputField.value = string;
     store1 += string;
     reset = 0;
     console.log("hello2:" + store1);
@@ -228,14 +286,14 @@ function decimalPlaces(num) {
 
 // };
 
-// if(document.querySelector('#input').innerHTML.length > 13 && alertCounter === 0){
+// if(inputField.value.length > 13 && alertCounter === 0){
 
 //    alert("You've reached the limits of this calculator. Please note that calculations with more digits could be buggy.")
 //    alertCounter = 1;
 // }
 
- //   if(document.querySelector('#input').innerHTML.length > 16) {
-   //     document.querySelector('#input').innerHTML = parseFloat(document.querySelector('#input').innerHTML).toExponential();
+ //   if(inputField.value.length > 16) {
+   //     inputField.value = parseFloat(inputField.value).toExponential();
       
   //  }
 }
@@ -247,14 +305,13 @@ function reset2() {
     operatorBefore = 0;
     reset = 0;
     dotBefore = 0;
-    document.querySelector('#input').innerHTML = "0";
+    inputField.value = "0";
     alertCounter = 0;
 
 }
 
 function backspace() {
 
-    document.querySelector('#input').innerHTML = document.querySelector('#input').innerHTML.slice(0, -1);
+    inputField.value = inputField.value.slice(0, -1);
     store1 = store1.slice(0, -1);
 }
-
