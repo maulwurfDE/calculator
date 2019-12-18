@@ -319,6 +319,7 @@ function decimalPlaces(num) {
   //  }
 
   inputField.focus();
+  inputField.select();
 
 }
 
