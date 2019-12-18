@@ -47,17 +47,33 @@ inputField.addEventListener('keyup',function() {
         }
 
     else if (/^[0-9*\/+^!\-.]$/.test(this.value[this.value.length-1])) {
-        console.log(this.value[this.value.length-1])
-        key = true;
-        if (inputField.value[0] === "0") inputField.value = this.value[1];
+        
+        if((dotBefore === 1 || operatorBefore === 1) && /^[*\/+^!\-.]$/.test(this.value[this.value.length-1])) {
+            inputField.value = inputField.value.removeCharAt(this.value.length-1);
+            interpreter(this.value[this.value.length-1]);
+        }
+        else {
+            console.log(this.value[this.value.length-1])
+            key = true;
+            if (inputField.value[0] === "0" && this.value[1] !== "." ) 
+                inputField.value = this.value[1];
+        
             interpreter(this.value[this.value.length-1])
-    }
+        }
+        }
 
     else if (/^[0-9*\/+^!\-.]$/.test(this.value[this.value.length-1]) === false)
             inputField.value = inputField.value.slice(0, -1);
 
     
 })
+
+
+String.prototype.removeCharAt = function (i) {
+    var tmp = this.split(''); // convert to an array
+    tmp.splice(i - 1 , 1); // remove 1 element from the array (adjusting for non-zero-indexed counts)
+    return tmp.join(''); // reconstruct the string
+}
 
 
 function add(a, b) {
@@ -169,8 +185,7 @@ function interpreter(string) {
     else if ((dotBefore === 1 || operatorBefore === 1) && 
             (string === "+" || string === "!" || string === "-" || 
             string === "*" || string === "/" || string === "^" || string === ".")) {
-          inputField.value = document.querySelector('#input').
-          innerHTML.replace(/.$/,string);
+           inputField.value = inputField.value.replace(/.$/,string);
          }
   else if (string === "=" && (store1 === "" || store2 === "" || store2 === undefined)) {
 
