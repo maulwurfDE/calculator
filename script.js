@@ -38,6 +38,12 @@ inputField.addEventListener('keyup',function() {
 
     }
 
+    //else if(keyCode === 16) {
+
+      //  interpreter("!");
+
+    // }
+
     else if (keyCode === 16 || keyCode === 27 || keyCode === 3 || keyCode === 9 || keyCode === 12 || keyCode === 17 || keyCode === 18 || keyCode === 19 || keyCode === 20 || keyCode === 21 || keyCode === 25 || keyCode === 27 || keyCode === 28 || keyCode === 29 || keyCode === 32 || keyCode === 33 || keyCode === 34 || keyCode === 35 || keyCode === 36 || keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40 ||  keyCode === 41 || keyCode === 42 || keyCode === 43 || keyCode === 44 || keyCode === 45 || keyCode === 46 || keyCode === 47 || keyCode === 91 || keyCode === 92 || keyCode === 93 || keyCode === 95 || keyCode === 112 || keyCode === 113 || keyCode === 114 || keyCode === 115 ||  keyCode === 116 ||
         keyCode === 117 || keyCode === 118 || keyCode === 119 || keyCode === 120 || keyCode === 121 || keyCode === 122 || keyCode === 123 || keyCode === 124 || keyCode === 125 || keyCode === 126 || keyCode === 127 || keyCode === 128 || keyCode === 129 || keyCode === 130 || keyCode === 131 || keyCode === 132 || keyCode === 133 || keyCode === 134 || keyCode === 135 ||
         keyCode === 144 || keyCode === 145 || keyCode === 151 || keyCode === 166 || keyCode === 167 || keyCode === 168 || keyCode === 172 || keyCode === 174 || keyCode === 175 || keyCode === 176 ||
