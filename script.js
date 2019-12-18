@@ -55,7 +55,7 @@ inputField.addEventListener('keyup',function() {
         else {
             console.log(this.value[this.value.length-1])
             key = true;
-            if (inputField.value[0] === "0" && this.value[1] !== "." ) 
+            if (inputField.value[0] === "0" && /^[0-9]$/.test(this.value[1])) 
                 inputField.value = this.value[1];
         
             interpreter(this.value[this.value.length-1])
@@ -161,7 +161,7 @@ function operate(operator,a,b) {
 }
 
 
-let store1 = "";
+let store1 = "0";
 let operator = "";
 let store2;
 let reset;
@@ -176,7 +176,7 @@ function interpreter(string) {
 
     }
 
-    else if (inputField.value === "0") {
+    else if (inputField.value === "0" && /^[0-9]$/.test(string)) {
         console.log("nonono");
         inputField.value = string; }
 
@@ -315,7 +315,7 @@ function decimalPlaces(num) {
 
 
 function reset2() {
-    store1 = "";
+    store1 = "0";
     store2 = "";
     operatorBefore = 0;
     reset = 0;
