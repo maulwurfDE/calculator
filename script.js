@@ -30,6 +30,7 @@ inputField.addEventListener('keyup',function() {
     console.log(keyCode);
     if(keyCode === 8) {
         store1 = store1.slice(0, -1);
+        operatorBefore = 0;
     }
 
     else if(keyCode === 13) {
@@ -211,8 +212,8 @@ key = false;
         inputField.value = operate("!",parseFloat(store1),parseFloat(store2));
         store1 = inputField.value;
         operator = "";
-        store2 = store1;
-        store1 = "";
+        // store2 = store1;
+        // store1 = "";
     }
 
     if(string === "+" || string === "-" || 
