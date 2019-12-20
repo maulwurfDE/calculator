@@ -231,7 +231,7 @@ key = false;
             
             
             inputField.value = operate(operator,parseFloat(store2),parseFloat(store1));
-           
+           console.log("What happens here? " + inputField.value);
             if (decimalPlaces(inputField.value) > 7) {
                 inputField.value = round(inputField.value, 7) }
             
@@ -244,9 +244,10 @@ key = false;
             }
          }
         
-     if (string !== "=") {
+     if (string !== "=" && store1 !== "") {
         store2 = store1;
         store1 = ""; 
+        console.log("Call the police!");
         }
     else if (string === "=") { store2 = "";}
         operator = string;
