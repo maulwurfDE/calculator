@@ -63,7 +63,7 @@ inputField.addEventListener('keyup',function() {
             console.log(this.value[this.value.length-1])
             key = true;
             if (inputField.value[0] === "0" && /^[0-9]$/.test(this.value[1])) 
-                inputField.value = this.value[1];
+                inputField.value = inputField.value.slice(1);
         
             interpreter(this.value[this.value.length-1])
         }
@@ -338,8 +338,13 @@ function reset2() {
 
 function backspace() {
 
-    
-    inputField.value = inputField.value.slice(0, -1);
     store1 = store1.slice(0, -1);
+
+    if (/^[0-9*\/+^!\-.]$/.test(inputField.value[inputField.value.length-1]) === true) {
+        store1 = store2;
+        store2 = "";
+    }
+
+    inputField.value = inputField.value.slice(0, -1);
     operatorBefore = 0;
 }
