@@ -337,6 +337,8 @@ function reset2() {
 
 function backspace() {
 
+    
     inputField.value = inputField.value.slice(0, -1);
     store1 = store1.slice(0, -1);
+    operatorBefore = 0;
 }
