@@ -22,7 +22,6 @@ function addEvent(elem, event, fn){
 
 let inputField = document.getElementById("new");
 inputField.value = "0";
-inputField.focus();
 let key = false;
 inputField.addEventListener('keyup',function() {
    
