@@ -22,6 +22,7 @@ function addEvent(elem, event, fn){
 
 let inputField = document.getElementById("new");
 inputField.value = "0";
+
 let key = false;
 inputField.addEventListener('keyup',function() {
    
@@ -228,8 +229,9 @@ key = false;
             }
             else {
             
-            
-            inputField.value = operate(operator,parseFloat(store2),parseFloat(store1));
+            let newStore1 = store1.slice(store1.indexOf(/[*\/+-^]/));
+            console.log("newStore1 " + newStore1);
+            inputField.value = operate(operator,parseFloat(store2),parseFloat(newStore1));
            console.log("What happens here? " + inputField.value);
             if (decimalPlaces(inputField.value) > 7) {
                 inputField.value = round(inputField.value, 7) }
@@ -264,7 +266,8 @@ key = false;
   
     else if (reset === 1) {
 //    inputField.value = string;
-    store1 += string;
+  //   store1 += string;
+  store1 = inputField.value;
     reset = 0;
     console.log("hello2:" + store1);
     operatorBefore = 0;
@@ -277,7 +280,9 @@ key = false;
 
     else if (string === '.' && store1.search(/\./) >= 0) {}
 
-    else {store1 += string;
+    else {
+        // store1 += string;
+        store1 = inputField.value;
         console.log("hello: " + store1);
         operatorBefore = 0;
     }
