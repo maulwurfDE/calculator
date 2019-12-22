@@ -230,7 +230,7 @@ key = false;
             }
             else {
             
-            let newStore2 = store1.slice(0, store1.search(/[*\/+\-^]/)-1)
+            let newStore2 = store1.slice(0, store1.search(/[*\/+\-^]/))
             console.log("newStore2 " + newStore2)
             let newStore1 = store1.slice(store1.search(/[*\/+\-^]/)+1);
             console.log("newStore1 " + newStore1);
