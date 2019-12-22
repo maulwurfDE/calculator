@@ -230,9 +230,9 @@ key = false;
             }
             else {
             
-            let newStore2 = store1.slice(0, store1.indexOf(/[*\/+-^]/)-1)
+            let newStore2 = store1.slice(0, store1.search(/[*\/+\-^]/)-1)
             console.log("newStore2 " + newStore2)
-            let newStore1 = store1.slice(store1.indexOf(/[*\/+-^]/));
+            let newStore1 = store1.slice(store1.search(/[*\/+\-^]/)+1);
             console.log("newStore1 " + newStore1);
             inputField.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
            console.log("What happens here? " + inputField.value);
