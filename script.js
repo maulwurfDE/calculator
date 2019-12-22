@@ -229,9 +229,11 @@ key = false;
             }
             else {
             
+            let newStore2 = store1.slice(0, store1.indexOf(/[*\/+-^]/)-1)
+            console.log("newStore2 " + newStore2)
             let newStore1 = store1.slice(store1.indexOf(/[*\/+-^]/));
             console.log("newStore1 " + newStore1);
-            inputField.value = operate(operator,parseFloat(store2),parseFloat(newStore1));
+            inputField.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
            console.log("What happens here? " + inputField.value);
             if (decimalPlaces(inputField.value) > 7) {
                 inputField.value = round(inputField.value, 7) }
@@ -351,4 +353,6 @@ function backspace() {
 
     inputField.value = inputField.value.slice(0, -1);
     operatorBefore = 0;
+    inputField.focus();
+
 }
