@@ -31,6 +31,7 @@ inputField.addEventListener('keyup',function() {
     if(keyCode === 8) {
         store1 = store1.slice(0, -1);
         operatorBefore = 0;
+        dotBefore = 0;
     }
 
     else if(keyCode === 13) {
@@ -339,6 +340,7 @@ function reset2() {
     dotBefore = 0;
     inputField.value = "0";
     alertCounter = 0;
+    inputField.focus();
 
 }
 
