@@ -25,21 +25,6 @@ inputField.value = "0";
 
 let key = false;
 
-/* inputField.onkeydown = function() {
-    var key = event.keyCode || event.charCode;
-
-    if( key == 8) {
-
-        if (/^[0-9*\/+^!\-.]$/.test(inputField.value[inputField.value.length-1]) === true) {
-            store1 = store2;
-            store2 = "";
-        }
-
-    }
-        
-}; */
-
-
 inputField.addEventListener('keyup',function() {
    
     keyCode = event.keyCode;
@@ -319,6 +304,11 @@ if (operatorBefore === 1) {
 if (string === ".") {dotBefore = 1;}
 else {dotBefore = 0;}
 
+
+  inputField.focus();
+
+}
+
 function round(value, decimals) {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
   }
@@ -333,25 +323,6 @@ function decimalPlaces(num) {
          // Adjust for scientific notation.
          - (match[2] ? +match[2] : 0));
   }
-
-
-
-// };
-
-// if(inputField.value.length > 13 && alertCounter === 0){
-
-//    alert("You've reached the limits of this calculator. Please note that calculations with more digits could be buggy.")
-//    alertCounter = 1;
-// }
-
- //   if(inputField.value.length > 16) {
-   //     inputField.value = parseFloat(inputField.value).toExponential();
-      
-  //  }
-
-  inputField.focus();
-
-}
 
 
 function reset2() {
@@ -370,10 +341,10 @@ function backspace() {
 
     store1 = store1.slice(0, -1);
 
-    if (/^[0-9*\/+^!\-.]$/.test(inputField.value[inputField.value.length-1]) === true) {
+    /* if (/^[0-9*\/+^!\-.]$/.test(inputField.value[inputField.value.length-1]) === true) {
         store1 = store2;
         store2 = "";
-    }
+    } */
 
     inputField.value = inputField.value.slice(0, -1);
     operatorBefore = 0;
