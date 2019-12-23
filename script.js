@@ -247,10 +247,14 @@ key = false;
             }
             else {
             
+                if(store1.slice(store1.search(/[*\/+\-^]/),store1.search(/[*\/+\-^]/)+1) !== "") {
+
             let newStore2 = store1.slice(0, store1.search(/[*\/+\-^]/))
             console.log("newStore2 " + newStore2)
             let newStore1 = store1.slice(store1.search(/[*\/+\-^]/)+1);
             console.log("newStore1 " + newStore1);
+            let newOperator = store1.slice(store1.search(/[*\/+\-^]/),store1.search(/[*\/+\-^]/)+1);
+            console.log("newOperator " + newOperator);
             inputField.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
            console.log("What happens here? " + inputField.value);
             if (decimalPlaces(inputField.value) > 7) {
@@ -262,7 +266,8 @@ key = false;
             if (string === "=") {}
             else {inputField.value += string;
                 reset = 1;}
-            }
+            } 
+        }
          }
         
      if (string !== "=" && store1 !== "") {
