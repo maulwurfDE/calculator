@@ -24,11 +24,28 @@ let inputField = document.getElementById("new");
 inputField.value = "0";
 
 let key = false;
+
+/* inputField.onkeydown = function() {
+    var key = event.keyCode || event.charCode;
+
+    if( key == 8) {
+
+        if (/^[0-9*\/+^!\-.]$/.test(inputField.value[inputField.value.length-1]) === true) {
+            store1 = store2;
+            store2 = "";
+        }
+
+    }
+        
+}; */
+
+
 inputField.addEventListener('keyup',function() {
    
     keyCode = event.keyCode;
     console.log(keyCode);
     if(keyCode === 8) {
+        
         store1 = store1.slice(0, -1);
         operatorBefore = 0;
         dotBefore = 0;
