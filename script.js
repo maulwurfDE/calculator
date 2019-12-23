@@ -60,6 +60,7 @@ inputField.addEventListener('keyup',function() {
         
         if((dotBefore === 1 || operatorBefore === 1) && /^[*\/+^!\-.]$/.test(this.value[this.value.length-1])) {
             inputField.value = inputField.value.removeCharAt(this.value.length-1);
+            store1 = inputField.value;
             interpreter(this.value[this.value.length-1]);
         }
         else {
