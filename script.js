@@ -128,16 +128,18 @@ if(b===0) c = 1;
 }
 
 function factorial(b) {
-	
-	let c = 1;
-    let i = 1;
-	while(i<=b) {
-      c *= i;
-		i++;
-	}
+    
+    if (b === 0) return 1;
+    return b * factorial(b-1);
+	// let c = 1;
+    // let i = 1;
+	// while(i<=b) {
+    //   c *= i;
+	// 	i++;
+	// }
 
-	if(b===0) c = 1;
-	return c;
+	// if(b===0) c = 1;
+	// return c;
 
 }
 
