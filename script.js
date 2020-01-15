@@ -21,9 +21,12 @@ function addEvent(elem, event, fn){
 
 
 let inputField = document.getElementById("new");
-inputField.value = "0";
+// inputField.value = "0";
 
 let key = false;
+// inputField.addEventListener('focus', function(){
+//     inputField.value = "";
+// },{once: true})
 
 inputField.addEventListener('keyup',function() {
    
@@ -67,6 +70,7 @@ inputField.addEventListener('keyup',function() {
             console.log(this.value[this.value.length-1])
             key = true;
             if (inputField.value[0] === "0" && /^[0-9]$/.test(this.value[1])) 
+                // inputField.value = inputField.value[1];
                 inputField.value = inputField.value.slice(1);
         
             interpreter(this.value[this.value.length-1])
@@ -334,7 +338,7 @@ function reset2() {
     operatorBefore = 0;
     reset = 0;
     dotBefore = 0;
-    inputField.value = "0";
+    inputField.value = "";
     alertCounter = 0;
     inputField.focus();
 
