@@ -229,7 +229,7 @@ key = false;
      if (operatorBefore === 0) {
         if(operator !== "" && store1 !== "" && store2 !== "" && store1 !== "." && store2 !== ".") {
           
-            if(operator === "/" && store1 === "0") {
+            if(store1.match(/\/0+$/)) {
                 reset2();
                 alert("You can't do that");
             }
