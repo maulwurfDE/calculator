@@ -1,1 +1,13 @@
-In this project I have constructed a calculator. To do this, I needed to demonstrate my Javascript, CSS and HTML skills. 
+# Calculator
+
+Create a basic calculator including different mathematical operations, keyboard support and more.
+
+## Demo
+
+[Demo](https://nearmint.github.io/calculator)
+
+## Built with
+
+* JavaScript
+* HTML
+* CSS
