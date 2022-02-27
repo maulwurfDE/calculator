@@ -23,7 +23,6 @@ let key = false;
 inputField.addEventListener('keyup',function() {
    
     keyCode = event.keyCode;
-    console.log(keyCode);
     if (keyCode === 8) {
         
         store1 = store1.slice(0, -1);
@@ -49,7 +48,6 @@ inputField.addEventListener('keyup',function() {
             interpreter(this.value[this.value.length-1]);
         }
         else {
-            console.log(this.value[this.value.length-1])
             key = true;
             if (inputField.value[0] === "0" && /^[0-9]$/.test(this.value[1])) 
                 inputField.value = inputField.value.slice(1);
@@ -182,22 +180,29 @@ function interpreter(string) {
                 }
                 else {
                     if(store1.slice(store1.search(/[*\/+\-^]/),store1.search(/[*\/+\-^]/)+1) !== "") {
-                        let newStore2 = store1.slice(0, store1.search(/[*\/+\-^]/))
-                        let newStore1 = store1.slice(store1.search(/[*\/+\-^]/)+1);
+                        let newStore2;
+                        let newStore1;
+                        if(store1.charAt(0) === '-') {
+                            let store1WithoutMinus = store1.slice(1);
+                            newStore2 = store1.slice(0, store1WithoutMinus.search(/[*\/+\-^]/)+1);
+                            newStore1 = store1.slice(store1WithoutMinus.search(/[*\/+\-^]/)+1);
+                        } else {
+                            newStore2 = store1.slice(0, store1.search(/[*\/+\-^]/)+1);
+                            newStore1 = store1.slice(store1.search(/[*\/+\-^]/)+1);
+                        }
+                        
+                        
+              
+                        
+
+
+
+
+                        console.log(`store1 ${store1}`);
                         let newOperator = store1.slice(store1.search(/[*\/+\-^]/),store1.search(/[*\/+\-^]/)+1);
+                        console.log(`newStore2 ${newStore2}, newStore1 ${newStore1}`)
                         inputField.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
-                        const children = document.getElementById('results-content').children;
-                        if(children.length === 13) document.getElementById('results-content').removeChild(document.getElementById('results-content').firstChild);
-                        const newResultsDiv = document.createElement('div');
-                        if(inputField.value < 0) newResultsDiv.style.color = 'red';
-                        if(Number(inputField.value) % 1 === 0) newResultsDiv.innerHTML = `${inputField.value}.00<br>`;
-                        else if(decimalPlaces(inputField.value) === 1) newResultsDiv.innerHTML = `${inputField.value}0<br>`;
-                        else newResultsDiv.innerHTML += `${inputField.value}<br>`;
-                        document.getElementById('results-content').append(newResultsDiv);
-                        audio.play();
-                        // Add the new calculations instead of replacing the div content with +=
-
-
+                        addingMachine(inputField.value);
 
                         if (decimalPlaces(inputField.value) > 3) {
                             inputField.value = round(inputField.value, 3) }
@@ -274,4 +279,17 @@ function backspace() {
     inputField.value = inputField.value.slice(0, -1);
     operatorBefore = 0;
     inputField.focus();
+}
+
+function addingMachine(num) {
+
+    const children = document.getElementById('results-content').children;
+    if(children.length === 13) document.getElementById('results-content').removeChild(document.getElementById('results-content').firstChild);
+    const newResultsDiv = document.createElement('div');
+    if(num < 0) newResultsDiv.style.color = 'red';
+    if(Number(num) % 1 === 0) newResultsDiv.innerHTML = `${num}.00<br>`;
+    else if(decimalPlaces(num) === 1) newResultsDiv.innerHTML = `${num}0<br>`;
+    else newResultsDiv.innerHTML += `${num}<br>`;
+    document.getElementById('results-content').append(newResultsDiv);
+    audio.play();
 }
