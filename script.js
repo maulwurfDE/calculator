@@ -191,16 +191,7 @@ function interpreter(string) {
                             newStore1 = store1.slice(store1.search(/[*\/+\-^]/)+1);
                         }
                         
-                        
-              
-                        
-
-
-
-
-                        console.log(`store1 ${store1}`);
                         let newOperator = store1.slice(store1.search(/[*\/+\-^]/),store1.search(/[*\/+\-^]/)+1);
-                        console.log(`newStore2 ${newStore2}, newStore1 ${newStore1}`)
                         inputField.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
                         addingMachine(inputField.value);
 
