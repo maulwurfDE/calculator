@@ -193,7 +193,7 @@ function interpreter(string) {
                         
                         let newOperator = store1.slice(store1.search(/[*\/+\-^]/),store1.search(/[*\/+\-^]/)+1);
                         inputField.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
-                        addingMachine(inputField.value);
+                       
 
                         if (decimalPlaces(inputField.value) > 3) {
                             inputField.value = round(inputField.value, 3) }
@@ -201,6 +201,7 @@ function interpreter(string) {
                         if (string === "=") {}
                         else {inputField.value += string;
                             reset = 1;}
+                        addingMachine(inputField.value);
                     } 
                 }
             }
@@ -273,7 +274,6 @@ function backspace() {
 }
 
 function addingMachine(num) {
-
     const children = document.getElementById('results-content').children;
     if(children.length === 13) document.getElementById('results-content').removeChild(document.getElementById('results-content').firstChild);
     const newResultsDiv = document.createElement('div');
