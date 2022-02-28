@@ -173,6 +173,7 @@ function interpreter(string) {
     if(string === "+" || string === "-" || 
     string === "*" || string === "/" || string === "^" || string === "=") {
         if (operatorBefore === 0) {
+            
             if(operator !== "" && store1 !== "" && store2 !== "" && store1 !== "." && store2 !== ".") {
                 if(store1.match(/\/0+$/)) {
                     reset2();
@@ -274,6 +275,10 @@ function backspace() {
 }
 
 function addingMachine(num) {
+    let char = num.charAt(num.length-1);
+    if(char === '*' || char === '+' || char === '-' || char === '^' || char === '/') {
+    num = num.slice(0, num.length-1);
+    }
     const children = document.getElementById('results-content').children;
     if(children.length === 13) document.getElementById('results-content').removeChild(document.getElementById('results-content').firstChild);
     const newResultsDiv = document.createElement('div');
