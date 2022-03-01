@@ -1,30 +1,63 @@
 const resultsContent = document.getElementById('results-content');
 const audio = new Audio('sounds/Rechenmaschine3.m4a');
 
-function addEvent(elem, event, fn){
-    if(elem.addEventListener){
-      elem.addEventListener(event, fn, false);
-    } else{
-      elem.attachEvent("on" + event,
-      function(){ return(fn.call(elem, window.event)); });
-    }}
-    var element = document.getElementById('new');
-    addEvent(element,'focus',function(){
-      var that = this;
-      setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
-    });
-    addEvent(element,'click',function(){
-        var that = this;
-        setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
-      });
+// function addEvent(elem, event, fn){
+//     if(elem.addEventListener){
+//       elem.addEventListener(event, fn, false);
+//     } else{
+//       elem.attachEvent("on" + event,
+//       function(){ return(fn.call(elem, window.event)); });
+//     }}
+//     var element = document.getElementById('new');
+//     addEvent(element,'focus',function(){
+//       var that = this;
+//       setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
+//     });
+//     addEvent(element,'click',function(){
+//         var that = this;
+//         setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
+//       });
+
+// document.addEventListener('touchstart', e => {
+//     if (document.querySelector('.mobile-input input') !== null) return;
+//     if (e.target.tagName === 'BUTTON') return;
+  
+//     const input = document.createElement('input');
+//     input.setAttribute('type', 'text');
+//     mobileInputDiv.appendChild(input);
+  
+//     // For some reason, the focus is immediately lost unless there is a delay on setting the focus
+//     setTimeout(() => {
+//       input.focus();
+//     }, 100);
+//   });
+  
+//   body.onkeydown = function(e) {
+//     if (!e.metaKey) {
+//       e.preventDefault();
+//     }
+
+//     // Main e.keyCode display
+//     document.querySelector('.keycode-display').innerHTML = e.keyCode;
+  
+//   body.onkeyup = function(e) {
+//     if(e.keyCode == '44') {
+//       body.onkeydown(e);
+//     }
+//   }
+
+  
+
 
 let inputField = document.getElementById("new");
 let key = false;
-inputField.addEventListener('keyup',function() {
+document.addEventListener('keyup',function(e) {
    
-    keyCode = event.keyCode;
-    if (keyCode === 8) {
-        
+    keyCode = e.key;
+    console.log(e.key);
+    if (keyCode === 'Backspace') {
+        inputField.value = inputField.value.slice(0, -1);
+        console.log(inputField.value);
         store1 = store1.slice(0, -1);
         operatorBefore = 0;
         dotBefore = 0;
@@ -296,7 +329,9 @@ function addingMachine(num) {
 // For example, a second inputField over the first and first run our algorithm then display a digit or operator. Or maybe some other way...
 // I believe that the deletion of characters also fires when you enter digits very fast after calculator has loaded. Check this too.  
 
-// find better font size and font color for the addingMachine. Some light red. Maybe with some opacity if thats possible. 
-// Create a switch that switches between calculator and addingmachine. 
+// Create a switch that switches between calculator and addingmachine. Put the switch maybe below the calculator alltogether (easiest way), center it, 
+// default option: adding machine, other option: calculator with old code and display input field.
+// Use comma instead of dot for adding machine? Or just seperate big numbers with comma and keep dot for fractions. Check in adding machine video what is 
+// appropriate 
 // For the adding machine part, rewrite the script.js so that the functionality of the calculator is switched as well. So that it works like a real adding machine.
 // Display the individual numbers added on the adding machine display, not the totals. 

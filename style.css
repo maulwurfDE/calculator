@@ -38,10 +38,10 @@
   }
 
   #results-content {
-    font-size: 1.97em;
+    font-size: 1.5em;
     font-weight: bold;
     padding: 10px;
-    color: green;
+    color: rgb(5, 172, 60);
   }
   
   .menu {

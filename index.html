@@ -3,14 +3,18 @@
         <head>
             <link rel="shortcut icon" href="#" />
             <link rel=stylesheet href="style.css" type="text/css"> 
-            <script src="script.js" defer></script>
+            <script src="scriptnew.js" defer></script>
         </head>
         <body>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <div class="over-container">
                 <div class='menu-container'>
                     <div class='menu'>
-                        <div id="display"><div id="input"><input id="new" autocomplete="off" autofocus placeholder="0"></div></div>
+                        <div id="display"><div id="input">
+                            <span id="new">0</span> 
+                            <!-- <input id="new" autocomplete="off" autofocus placeholder="0"> -->
+                        </div>
+                        </div>
                         <div id="reset" onclick="reset2()">AC</div>
                         <div id="back" onclick="backspace()">⌫</div>
                         <div id="potenz" onclick="interpreter('^')">x<sup id="small">y</sup></div>
