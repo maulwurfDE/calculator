@@ -158,7 +158,7 @@ function interpreter(string) {
 
     }
 
-    else if(string === '.' && store1.search(/\./) >= 0) {
+    else if(string === '.' && store1.replace(store2,'').search(/\./) >= 0) {
 
     }
     
@@ -193,7 +193,6 @@ function interpreter(string) {
                             newStore1 = store1.slice(store1.search(/[*\/+\-^]/)+1);
                         }
                         
-                        let newOperator = store1.slice(store1.search(/[*\/+\-^]/),store1.search(/[*\/+\-^]/)+1);
                         inputField.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
                        
 

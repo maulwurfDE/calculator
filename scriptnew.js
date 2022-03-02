@@ -1,99 +1,32 @@
 const resultsContent = document.getElementById('results-content');
 const audio = new Audio('sounds/Rechenmaschine3.m4a');
 
-// function addEvent(elem, event, fn){
-//     if(elem.addEventListener){
-//       elem.addEventListener(event, fn, false);
-//     } else{
-//       elem.attachEvent("on" + event,
-//       function(){ return(fn.call(elem, window.event)); });
-//     }}
-//     var element = document.getElementById('new');
-//     addEvent(element,'focus',function(){
-//       var that = this;
-//       setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
-//     });
-//     addEvent(element,'click',function(){
-//         var that = this;
-//         setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
-//       });
-
-// document.addEventListener('touchstart', e => {
-//     if (document.querySelector('.mobile-input input') !== null) return;
-//     if (e.target.tagName === 'BUTTON') return;
-  
-//     const input = document.createElement('input');
-//     input.setAttribute('type', 'text');
-//     mobileInputDiv.appendChild(input);
-  
-//     // For some reason, the focus is immediately lost unless there is a delay on setting the focus
-//     setTimeout(() => {
-//       input.focus();
-//     }, 100);
-//   });
-  
-//   body.onkeydown = function(e) {
-//     if (!e.metaKey) {
-//       e.preventDefault();
-//     }
-
-//     // Main e.keyCode display
-//     document.querySelector('.keycode-display').innerHTML = e.keyCode;
-  
-//   body.onkeyup = function(e) {
-//     if(e.keyCode == '44') {
-//       body.onkeydown(e);
-//     }
-//   }
-
-  
-
-
 let inputField = document.getElementById("new");
 let key = false;
-document.addEventListener('keyup',function(e) {
+document.addEventListener('keydown',function(e) {
    
     keyCode = e.key;
     console.log(e.key);
     if (keyCode === 'Backspace') {
-        inputField.value = inputField.value.slice(0, -1);
-        console.log(inputField.value);
+        inputField.textContent = inputField.textContent.slice(0, -1);
+        console.log(inputField.textContent);
         store1 = store1.slice(0, -1);
         operatorBefore = 0;
         dotBefore = 0;
     }
-    else if (keyCode === 13) {
+    else if (keyCode === 'Enter') {
         interpreter('=');     
     }
 
-    else if (keyCode === 16 || keyCode === 27 || keyCode === 3 || keyCode === 9 || keyCode === 12 || keyCode === 17 || keyCode === 18 || keyCode === 19 || keyCode === 20 || keyCode === 21 || keyCode === 25 || keyCode === 27 || keyCode === 28 || keyCode === 29 || keyCode === 32 || keyCode === 33 || keyCode === 34 || keyCode === 35 || keyCode === 36 || keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40 ||  keyCode === 41 || keyCode === 42 || keyCode === 43 || keyCode === 44 || keyCode === 45 || keyCode === 46 || keyCode === 47 || keyCode === 91 || keyCode === 92 || keyCode === 93 || keyCode === 95 || keyCode === 112 || keyCode === 113 || keyCode === 114 || keyCode === 115 ||  keyCode === 116 ||
-        keyCode === 117 || keyCode === 118 || keyCode === 119 || keyCode === 120 || keyCode === 121 || keyCode === 122 || keyCode === 123 || keyCode === 124 || keyCode === 125 || keyCode === 126 || keyCode === 127 || keyCode === 128 || keyCode === 129 || keyCode === 130 || keyCode === 131 || keyCode === 132 || keyCode === 133 || keyCode === 134 || keyCode === 135 ||
-        keyCode === 144 || keyCode === 145 || keyCode === 151 || keyCode === 166 || keyCode === 167 || keyCode === 168 || keyCode === 172 || keyCode === 174 || keyCode === 175 || keyCode === 176 ||
-        keyCode === 177 || keyCode === 178 || keyCode === 179 || keyCode === 180 || keyCode === 181 || keyCode === 182 || keyCode === 183 || keyCode === 224 || keyCode === 225 ||
-        keyCode === 230 || keyCode === 233 || keyCode === 234 || keyCode === 235 || keyCode === 240 || keyCode === 242 || keyCode === 243 || keyCode === 244 || keyCode === 251 || keyCode === 255) {
-        }
+    else if (keyCode === '*' || keyCode === '/' || keyCode === '-' || keyCode === '^' || keyCode === '+' || keyCode === '!' || keyCode === '0' || 
+    keyCode === '1' || keyCode === '2' || keyCode === '3' || keyCode === '4' || keyCode === '5' || keyCode === '6' || keyCode === '7' || 
+    keyCode === '8' || keyCode === '9') {
+        interpreter(keyCode);
+    }
 
-    else if (/^[0-9*\/+^!\-.]$/.test(this.value[this.value.length-1])) {
-        
-        if((dotBefore === 1 || operatorBefore === 1) && /^[*\/+^!\-.]$/.test(this.value[this.value.length-1])) {
-            inputField.value = inputField.value.removeCharAt(this.value.length-1);
-            store1 = inputField.value;
-            // console.log(this.value[this.value.length-1]);
-            interpreter(this.value[this.value.length-1]);
-        }
-        else {
-            key = true;
-            if (inputField.value[0] === "0" && /^[0-9]$/.test(this.value[1])) 
-                inputField.value = inputField.value.slice(1);
-        
-            interpreter(this.value[this.value.length-1])
-        }
-        }
-
-    else if (/^[0-9*\/+^!\-.]$/.test(this.value[this.value.length-1]) === false)
-            inputField.value = inputField.value.slice(0, -1);
-
-    
+    else if (keyCode === ',' || keyCode === '.') {
+        interpreter('.');
+    }
 })
 
 
@@ -175,33 +108,35 @@ let operatorBefore = 0;
 let dotBefore = 0;
 let alertCounter = 0;
 
-function interpreter(string) {
-    if (inputField.value === "0" && string === ".") {
-        inputField.value = "0.";
+function interpreter(string) {  
+
+    if (inputField.textContent === "0" && string === ".") {
+        inputField.textContent = "0.";
     }
-    else if (inputField.value === "0" && /^[0-9]$/.test(string)) {
-        inputField.value = string; 
+    else if (inputField.textContent === "0" && /^[0-9]$/.test(string)) {
+        inputField.textContent = string; 
     }       
     else if ((dotBefore === 1 || operatorBefore === 1) && 
             (string === "+" || string === "!" || string === "-" || 
             string === "*" || string === "/" || string === "^" || string === ".")) {
-           inputField.value = inputField.value.replace(/.$/,string);
+            console.log(inputField.textContent + 'hii')
+            inputField.textContent = inputField.textContent.replace(/.$/,string);
          }
     else if (string === "=" && (store1 === "" || store2 === "" || store2 === undefined)) {
 
     }
 
-    else if(string === '.' && store1.search(/\./) >= 0) {
+    else if(string === '.' && store1.replace(store2,'').search(/\./) >= 0) {
 
     }
     
     else if (key === false) {
-        inputField.value += string;
+        inputField.textContent += string;
     }
     key = false;
     if(string === "!") {
-        inputField.value = operate("!",parseFloat(store1),parseFloat(store2));
-        store1 = inputField.value;
+        inputField.textContent = operate("!",parseFloat(store1),parseFloat(store2));
+        store1 = inputField.textContent;
         operator = "";
     }
     if(string === "+" || string === "-" || 
@@ -225,18 +160,15 @@ function interpreter(string) {
                             newStore2 = store1.slice(0, store1.search(/[*\/+\-^]/)+1);
                             newStore1 = store1.slice(store1.search(/[*\/+\-^]/)+1);
                         }
-                        
-                        let newOperator = store1.slice(store1.search(/[*\/+\-^]/),store1.search(/[*\/+\-^]/)+1);
-                        inputField.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
+                        inputField.textContent = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
                        
-
-                        if (decimalPlaces(inputField.value) > 3) {
-                            inputField.value = round(inputField.value, 3) }
-                        store1 = inputField.value;
+                        if (decimalPlaces(inputField.textContent) > 3) {
+                            inputField.textContent = round(inputField.textContent, 3) }
+                        store1 = inputField.textContent;
                         if (string === "=") {}
-                        else {inputField.value += string;
+                        else {inputField.textContent += string;
                             reset = 1;}
-                        addingMachine(inputField.value);
+                        addingMachine(inputField.textContent);
                     } 
                 }
             }
@@ -244,6 +176,7 @@ function interpreter(string) {
             if (string !== "=" && store1 !== "") {
                 store2 = store1;
                 store1 = ""; 
+                dotBefore = 0;
             }
             else if (string === "=") { store2 = "";}
             operator = string;
@@ -252,7 +185,7 @@ function interpreter(string) {
         else operatorBefore = 1;
     }
     else if (reset === 1) {
-        store1 = inputField.value;
+        store1 = inputField.textContent;
         reset = 0;
         operatorBefore = 0;
     }
@@ -262,7 +195,7 @@ function interpreter(string) {
     }
     else if (string === '.' && store1.search(/\./) >= 0) {}
     else {
-        store1 = inputField.value;
+        store1 = inputField.textContent;
         operatorBefore = 0;
     }
     if (operatorBefore === 1) {
@@ -295,7 +228,7 @@ function reset2() {
     operatorBefore = 0;
     reset = 0;
     dotBefore = 0;
-    inputField.value = "";
+    inputField.textContent = "0";
     alertCounter = 0;
     inputField.focus();
 
@@ -303,7 +236,7 @@ function reset2() {
 
 function backspace() {
     store1 = store1.slice(0, -1);
-    inputField.value = inputField.value.slice(0, -1);
+    inputField.textContent = inputField.textContent.slice(0, -1);
     operatorBefore = 0;
     inputField.focus();
 }
