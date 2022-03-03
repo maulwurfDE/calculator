@@ -1,5 +1,4 @@
-const resultsContent = document.getElementById('results-content');
-const audio = new Audio('sounds/Rechenmaschine3.m4a');
+
 
 function addEvent(elem, event, fn){
     if(elem.addEventListener){
@@ -18,10 +17,9 @@ function addEvent(elem, event, fn){
         setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
       });
 
-let inputField = document.getElementById("new");
-let key = false;
-inputField.addEventListener('keyup',function() {
-   
+let inputFieldOld = document.getElementById("old");
+let keyOld = false;
+inputFieldOld.addEventListener('keyup',function() {
     keyCode = event.keyCode;
     if (keyCode === 8) {
         
@@ -30,7 +28,7 @@ inputField.addEventListener('keyup',function() {
         dotBefore = 0;
     }
     else if (keyCode === 13) {
-        interpreter('=');     
+        interpreterOld('=');     
     }
 
     else if (keyCode === 16 || keyCode === 27 || keyCode === 3 || keyCode === 9 || keyCode === 12 || keyCode === 17 || keyCode === 18 || keyCode === 19 || keyCode === 20 || keyCode === 21 || keyCode === 25 || keyCode === 27 || keyCode === 28 || keyCode === 29 || keyCode === 32 || keyCode === 33 || keyCode === 34 || keyCode === 35 || keyCode === 36 || keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40 ||  keyCode === 41 || keyCode === 42 || keyCode === 43 || keyCode === 44 || keyCode === 45 || keyCode === 46 || keyCode === 47 || keyCode === 91 || keyCode === 92 || keyCode === 93 || keyCode === 95 || keyCode === 112 || keyCode === 113 || keyCode === 114 || keyCode === 115 ||  keyCode === 116 ||
@@ -43,22 +41,22 @@ inputField.addEventListener('keyup',function() {
     else if (/^[0-9*\/+^!\-.]$/.test(this.value[this.value.length-1])) {
         
         if((dotBefore === 1 || operatorBefore === 1) && /^[*\/+^!\-.]$/.test(this.value[this.value.length-1])) {
-            inputField.value = inputField.value.removeCharAt(this.value.length-1);
-            store1 = inputField.value;
+            inputFieldOld.value = inputFieldOld.value.removeCharAt(this.value.length-1);
+            store1 = inputFieldOld.value;
             // console.log(this.value[this.value.length-1]);
-            interpreter(this.value[this.value.length-1]);
+            interpreterOld(this.value[this.value.length-1]);
         }
         else {
-            key = true;
-            if (inputField.value[0] === "0" && /^[0-9]$/.test(this.value[1])) 
-                inputField.value = inputField.value.slice(1);
+            keyOld = true;
+            if (inputFieldOld.value[0] === "0" && /^[0-9]$/.test(this.value[1])) 
+                inputFieldOld.value = inputFieldOld.value.slice(1);
         
-            interpreter(this.value[this.value.length-1])
+            interpreterOld(this.value[this.value.length-1])
         }
         }
 
     else if (/^[0-9*\/+^!\-.]$/.test(this.value[this.value.length-1]) === false)
-            inputField.value = inputField.value.slice(0, -1);
+            inputFieldOld.value = inputFieldOld.value.slice(0, -1);
 
     
 })
@@ -71,88 +69,17 @@ String.prototype.removeCharAt = function (i) {
 }
 
 
-function add(a, b) {
-    return a+b;
-}
-
-function subtract(a, b) {
-    return a - b;
+function interpreterOld(string) {
+    if (inputFieldOld.value === "0" && string === ".") {
+        inputFieldOld.value = "0.";
     }
-
-
-function multiply(a,b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
-}
-
-function power(a,b) {
-	let i = 1;
-	let c = a;
-	while(i<b) {
-	 c *= a;
-		i++;
-	}
-if(b===0) c = 1;
-	return c;
-}
-
-function factorial(b) {
-    
-    if (b === 0) return 1;
-    return b * factorial(b-1);
-}
-
-function operate(operator,a,b) {
-
-    if (operator === "+") {
-        return add(a,b);
-    }
-
-    else if (operator === "-") {
-        return subtract(a,b);
-    }
-
-    else if (operator === "*") {
-       return multiply(a,b);
-    }
-
-    else if (operator === "/") {
-        return divide(a,b);    
-    }
-
-    else if (operator === "^") {
-        return power(a,b);
-    }
-
-    else if (operator === "!") {
-        return factorial(a);
-    }
-    else { console.log("ERROR")}
-}
-
-
-let store1 = "0";
-let operator = "";
-let store2;
-let reset;
-let operatorBefore = 0;
-let dotBefore = 0;
-let alertCounter = 0;
-
-function interpreter(string) {
-    if (inputField.value === "0" && string === ".") {
-        inputField.value = "0.";
-    }
-    else if (inputField.value === "0" && /^[0-9]$/.test(string)) {
-        inputField.value = string; 
+    else if (inputFieldOld.value === "0" && /^[0-9]$/.test(string)) {
+        inputFieldOld.value = string; 
     }       
     else if ((dotBefore === 1 || operatorBefore === 1) && 
             (string === "+" || string === "!" || string === "-" || 
             string === "*" || string === "/" || string === "^" || string === ".")) {
-           inputField.value = inputField.value.replace(/.$/,string);
+           inputFieldOld.value = inputFieldOld.value.replace(/.$/,string);
          }
     else if (string === "=" && (store1 === "" || store2 === "" || store2 === undefined)) {
 
@@ -162,13 +89,13 @@ function interpreter(string) {
 
     }
     
-    else if (key === false) {
-        inputField.value += string;
+    else if (keyOld === false) {
+        inputFieldOld.value += string;
     }
-    key = false;
+    keyOld = false;
     if(string === "!") {
-        inputField.value = operate("!",parseFloat(store1),parseFloat(store2));
-        store1 = inputField.value;
+        inputFieldOld.value = operate("!",parseFloat(store1),parseFloat(store2));
+        store1 = inputFieldOld.value;
         operator = "";
     }
     if(string === "+" || string === "-" || 
@@ -178,6 +105,7 @@ function interpreter(string) {
             if(operator !== "" && store1 !== "" && store2 !== "" && store1 !== "." && store2 !== ".") {
                 if(store1.match(/\/0+$/)) {
                     reset2();
+                    inputFieldOld.focus();
                     alert("You can't do that");
                 }
                 else {
@@ -193,16 +121,15 @@ function interpreter(string) {
                             newStore1 = store1.slice(store1.search(/[*\/+\-^]/)+1);
                         }
                         
-                        inputField.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
+                        inputFieldOld.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
                        
 
-                        if (decimalPlaces(inputField.value) > 3) {
-                            inputField.value = round(inputField.value, 3) }
-                        store1 = inputField.value;
+                        if (decimalPlaces(inputFieldOld.value) > 3) {
+                            inputFieldOld.value = round(inputFieldOld.value, 3) }
+                        store1 = inputFieldOld.value;
                         if (string === "=") {}
-                        else {inputField.value += string;
+                        else {inputFieldOld.value += string;
                             reset = 1;}
-                        addingMachine(inputField.value);
                     } 
                 }
             }
@@ -218,7 +145,7 @@ function interpreter(string) {
         else operatorBefore = 1;
     }
     else if (reset === 1) {
-        store1 = inputField.value;
+        store1 = inputFieldOld.value;
         reset = 0;
         operatorBefore = 0;
     }
@@ -228,7 +155,7 @@ function interpreter(string) {
     }
     else if (string === '.' && store1.search(/\./) >= 0) {}
     else {
-        store1 = inputField.value;
+        store1 = inputFieldOld.value;
         operatorBefore = 0;
     }
     if (operatorBefore === 1) {
@@ -236,7 +163,7 @@ function interpreter(string) {
     }
     if (string === ".") {dotBefore = 1;}
     else {dotBefore = 0;}
-    inputField.focus();
+    inputFieldOld.focus();
 }
 
 function round(value, decimals) {
@@ -255,47 +182,10 @@ function decimalPlaces(num) {
 }
 
 
-function reset2() {
-    store1 = "0";
-    store2 = "";
-    operatorBefore = 0;
-    reset = 0;
-    dotBefore = 0;
-    inputField.value = "";
-    alertCounter = 0;
-    inputField.focus();
-
-}
 
 function backspace() {
     store1 = store1.slice(0, -1);
-    inputField.value = inputField.value.slice(0, -1);
+    inputFieldOld.value = inputFieldOld.value.slice(0, -1);
     operatorBefore = 0;
-    inputField.focus();
+    inputFieldOld.focus();
 }
-
-function addingMachine(num) {
-    let char = num.charAt(num.length-1);
-    if(char === '*' || char === '+' || char === '-' || char === '^' || char === '/') {
-    num = num.slice(0, num.length-1);
-    }
-    const children = document.getElementById('results-content').children;
-    if(children.length === 17) document.getElementById('results-content').removeChild(document.getElementById('results-content').firstChild);
-    const newResultsDiv = document.createElement('div');
-    if(num < 0) newResultsDiv.style.color = '#ff3c00fa';
-    if(Number(num) % 1 === 0) newResultsDiv.innerHTML = `${num}.00<br>`;
-    else if(decimalPlaces(num) === 1) newResultsDiv.innerHTML = `${num}0<br>`;
-    else newResultsDiv.innerHTML += `${num}<br>`;
-    document.getElementById('results-content').append(newResultsDiv);
-    audio.play();
-}
-
-
-// check the formula how the characters in the inputField get automatically deleted. Avoid this automatic deletion of characters by rewriting this algorithm. 
-// For example, a second inputField over the first and first run our algorithm then display a digit or operator. Or maybe some other way...
-// I believe that the deletion of characters also fires when you enter digits very fast after calculator has loaded. Check this too.  
-
-// find better font size and font color for the addingMachine. Some light red. Maybe with some opacity if thats possible. 
-// Create a switch that switches between calculator and addingmachine. 
-// For the adding machine part, rewrite the script.js so that the functionality of the calculator is switched as well. So that it works like a real adding machine.
-// Display the individual numbers added on the adding machine display, not the totals. 

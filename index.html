@@ -4,6 +4,7 @@
             <link rel="shortcut icon" href="#" />
             <link rel=stylesheet href="style.css" type="text/css"> 
             <script src="scriptnew.js" defer></script>
+            <script src="script.js" defer></script>
         </head>
         <body>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -12,7 +13,7 @@
                     <div class='menu'>
                         <div id="display"><div id="input">
                             <span id="new">0</span> 
-                            <!-- <input id="new" autocomplete="off" autofocus placeholder="0"> -->
+                            <input id="old" autocomplete="off" autofocus placeholder="0">
                         </div>
                         </div>
                         <div id="reset" onclick="reset2()">AC</div>
@@ -43,5 +44,18 @@
                     </div>
                 </div>
             </div>
+            <div id="footer">
+ 
+                
+                <label class="toggle">
+                    <input id="toggleswitch" type="checkbox">
+                    <span class="roundbutton"></span>
+                </label>
+                <div id="ergebnis" class="ergebnis">
+                    <span id="status">Style: Electronic Adding Machine</span>
+                </div>
+
+            </div>
+
         </body>
     </html>

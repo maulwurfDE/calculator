@@ -1,10 +1,19 @@
+let store1 = "0";
+let operator = "";
+let store2;
+let reset;
+let operatorBefore = 0;
+let dotBefore = 0;
+let alertCounter = 0;
+
 const resultsContent = document.getElementById('results-content');
 const audio = new Audio('sounds/Rechenmaschine3.m4a');
 
 let inputField = document.getElementById("new");
 let key = false;
-document.addEventListener('keydown',function(e) {
-   
+document.addEventListener('keydown', addingMachineKeyboard);
+
+function addingMachineKeyboard (e) {
     keyCode = e.key;
     console.log(e.key);
     if (keyCode === 'Backspace') {
@@ -27,7 +36,7 @@ document.addEventListener('keydown',function(e) {
     else if (keyCode === ',' || keyCode === '.') {
         interpreter('.');
     }
-})
+}
 
 
 String.prototype.removeCharAt = function (i) {
@@ -100,15 +109,14 @@ function operate(operator,a,b) {
 }
 
 
-let store1 = "0";
-let operator = "";
-let store2;
-let reset;
-let operatorBefore = 0;
-let dotBefore = 0;
-let alertCounter = 0;
+
 
 function interpreter(string) {  
+
+    if(input.checked) {
+        interpreterOld(string);
+        return;
+    }
 
     if (inputField.textContent === "0" && string === ".") {
         inputField.textContent = "0.";
@@ -146,6 +154,7 @@ function interpreter(string) {
             if(operator !== "" && store1 !== "" && store2 !== "" && store1 !== "." && store2 !== ".") {
                 if(store1.match(/\/0+$/)) {
                     reset2();
+                    inputField.focus();
                     alert("You can't do that");
                 }
                 else {
@@ -230,7 +239,7 @@ function reset2() {
     dotBefore = 0;
     inputField.textContent = "0";
     alertCounter = 0;
-    inputField.focus();
+    inputFieldOld.value = '';
 
 }
 
@@ -257,13 +266,37 @@ function addingMachine(num) {
     audio.play();
 }
 
+let input = document.getElementById('toggleswitch');
+let outputtext = document.getElementById('status');
 
-// check the formula how the characters in the inputField get automatically deleted. Avoid this automatic deletion of characters by rewriting this algorithm. 
-// For example, a second inputField over the first and first run our algorithm then display a digit or operator. Or maybe some other way...
-// I believe that the deletion of characters also fires when you enter digits very fast after calculator has loaded. Check this too.  
+input.addEventListener('change',function(){
+    if(this.checked) {
+        outputtext.innerHTML = "Style: Calculator with Input Field";
+        document.getElementById('new').style.display = 'none';
+        document.getElementById('old').style.display = 'inline';
+        document.getElementById('results-inner').style.display = 'none';
+        document.getElementById('results-inner').textContent = '';
+        document.removeEventListener('keydown', addingMachineKeyboard);
+        reset2();
+        document.getElementById('old').focus();
+    } else {
+        outputtext.innerHTML = "Style: Electronic Adding Machine";
+        document.getElementById('old').style.display = 'none';
+        document.getElementById('new').style.display = 'block';
+        document.getElementById('results-inner').style.display = 'flex';
+        document.addEventListener('keydown', addingMachineKeyboard);
+        reset2();
+        inputField.focus();
+        
+    }
+});
+
 
 // Create a switch that switches between calculator and addingmachine. Put the switch maybe below the calculator alltogether (easiest way), center it, 
 // default option: adding machine, other option: calculator with old code and display input field.
+
+// maybe remove input field completely, also from calculator version. It's too error-prone. 
+
 // Use comma instead of dot for adding machine? Or just seperate big numbers with comma and keep dot for fractions. Check in adding machine video what is 
 // appropriate 
 // For the adding machine part, rewrite the script.js so that the functionality of the calculator is switched as well. So that it works like a real adding machine.
