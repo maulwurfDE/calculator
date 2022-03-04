@@ -13,7 +13,11 @@ function backspace() {
     store1 = store1.slice(0, -1);
     inputField.textContent = inputField.textContent.slice(0, -1);
     operatorBefore = 0;
+    dotBefore = 0;
     inputField.focus();
+
+
+
 }
 
 

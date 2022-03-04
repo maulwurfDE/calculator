@@ -17,11 +17,7 @@ function addingMachineKeyboard (e) {
     keyCode = e.key;
     console.log(e.key);
     if (keyCode === 'Backspace') {
-        inputField.textContent = inputField.textContent.slice(0, -1);
-        console.log(inputField.textContent);
-        store1 = store1.slice(0, -1);
-        operatorBefore = 0;
-        dotBefore = 0;
+        backspace();
     }
     else if (keyCode === 'Enter') {
         interpreter('=');     
@@ -113,16 +109,22 @@ function interpreter(string) {
         return;
     }
 
+    // if(string === '+' || string === '-' || string === '/' || string === '*' || string === '^') {
+    //     addingMachine(store1);
+    // }
+
     if (inputField.textContent === "0" && string === ".") {
         inputField.textContent = "0.";
     }
     else if (inputField.textContent === "0" && /^[0-9]$/.test(string)) {
         inputField.textContent = string; 
     }       
+    
     else if ((dotBefore === 1 || operatorBefore === 1) && 
             (string === "+" || string === "!" || string === "-" || 
             string === "*" || string === "/" || string === "^" || string === ".")) {
-            console.log(inputField.textContent + 'hii')
+                // this probably has to go
+                console.log(inputField.textContent + 'hii')
             inputField.textContent = inputField.textContent.replace(/.$/,string);
          }
     else if (string === "=" && (store1 === "" || store2 === "" || store2 === undefined)) {
@@ -256,9 +258,13 @@ input.addEventListener('change',function(){
 });
 
 
-// maybe remove input field completely, also from calculator version. It's too error-prone. 
+// The basic functionality of the calculator on the display seems to stay the same. 
+// When someone enters a number and clicks add, a) the number is printed to the Bon, b) The plus sign is not printed to the display, c) The number on the display
+// flickers one time. 
+// For the adding machine part, rewrite the script.js so that the functionality of the calculator is switched as well. So that it works like a real adding machine.
+// Display the individual numbers added on the adding machine display, not the totals. 
+
+// Add new sounds for pressing number keys and for equal calculation(doublesound kinda).
 
 // Use comma instead of dot for adding machine? Or just seperate big numbers with comma and keep dot for fractions. Check in adding machine video what is 
 // appropriate 
-// For the adding machine part, rewrite the script.js so that the functionality of the calculator is switched as well. So that it works like a real adding machine.
-// Display the individual numbers added on the adding machine display, not the totals. 
