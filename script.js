@@ -17,49 +17,35 @@ function addEvent(elem, event, fn){
         setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
       });
 
-let inputFieldOld = document.getElementById("old");
+let inputFieldOld = document.getElementById("new");
 let keyOld = false;
-inputFieldOld.addEventListener('keyup',function() {
-    keyCode = event.keyCode;
-    if (keyCode === 8) {
-        
+
+
+function calculatorEvent (e) {
+    keyCode = e.key;
+    console.log(e.key);
+    if (keyCode === 'Backspace') {
+        inputField.textContent = inputField.textContent.slice(0, -1);
+        console.log(inputField.textContent);
         store1 = store1.slice(0, -1);
         operatorBefore = 0;
         dotBefore = 0;
     }
-    else if (keyCode === 13) {
+    else if (keyCode === 'Enter') {
         interpreterOld('=');     
     }
 
-    else if (keyCode === 16 || keyCode === 27 || keyCode === 3 || keyCode === 9 || keyCode === 12 || keyCode === 17 || keyCode === 18 || keyCode === 19 || keyCode === 20 || keyCode === 21 || keyCode === 25 || keyCode === 27 || keyCode === 28 || keyCode === 29 || keyCode === 32 || keyCode === 33 || keyCode === 34 || keyCode === 35 || keyCode === 36 || keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40 ||  keyCode === 41 || keyCode === 42 || keyCode === 43 || keyCode === 44 || keyCode === 45 || keyCode === 46 || keyCode === 47 || keyCode === 91 || keyCode === 92 || keyCode === 93 || keyCode === 95 || keyCode === 112 || keyCode === 113 || keyCode === 114 || keyCode === 115 ||  keyCode === 116 ||
-        keyCode === 117 || keyCode === 118 || keyCode === 119 || keyCode === 120 || keyCode === 121 || keyCode === 122 || keyCode === 123 || keyCode === 124 || keyCode === 125 || keyCode === 126 || keyCode === 127 || keyCode === 128 || keyCode === 129 || keyCode === 130 || keyCode === 131 || keyCode === 132 || keyCode === 133 || keyCode === 134 || keyCode === 135 ||
-        keyCode === 144 || keyCode === 145 || keyCode === 151 || keyCode === 166 || keyCode === 167 || keyCode === 168 || keyCode === 172 || keyCode === 174 || keyCode === 175 || keyCode === 176 ||
-        keyCode === 177 || keyCode === 178 || keyCode === 179 || keyCode === 180 || keyCode === 181 || keyCode === 182 || keyCode === 183 || keyCode === 224 || keyCode === 225 ||
-        keyCode === 230 || keyCode === 233 || keyCode === 234 || keyCode === 235 || keyCode === 240 || keyCode === 242 || keyCode === 243 || keyCode === 244 || keyCode === 251 || keyCode === 255) {
-        }
+    else if (keyCode === '*' || keyCode === '/' || keyCode === '-' || keyCode === '^' || keyCode === '+' || keyCode === '!' || keyCode === '0' || 
+    keyCode === '1' || keyCode === '2' || keyCode === '3' || keyCode === '4' || keyCode === '5' || keyCode === '6' || keyCode === '7' || 
+    keyCode === '8' || keyCode === '9') {
+        interpreterOld(keyCode);
+    }
 
-    else if (/^[0-9*\/+^!\-.]$/.test(this.value[this.value.length-1])) {
-        
-        if((dotBefore === 1 || operatorBefore === 1) && /^[*\/+^!\-.]$/.test(this.value[this.value.length-1])) {
-            inputFieldOld.value = inputFieldOld.value.removeCharAt(this.value.length-1);
-            store1 = inputFieldOld.value;
-            // console.log(this.value[this.value.length-1]);
-            interpreterOld(this.value[this.value.length-1]);
-        }
-        else {
-            keyOld = true;
-            if (inputFieldOld.value[0] === "0" && /^[0-9]$/.test(this.value[1])) 
-                inputFieldOld.value = inputFieldOld.value.slice(1);
-        
-            interpreterOld(this.value[this.value.length-1])
-        }
-        }
-
-    else if (/^[0-9*\/+^!\-.]$/.test(this.value[this.value.length-1]) === false)
-            inputFieldOld.value = inputFieldOld.value.slice(0, -1);
-
+    else if (keyCode === ',' || keyCode === '.') {
+        interpreterOld('.');
+    }
     
-})
+}
 
 
 String.prototype.removeCharAt = function (i) {
@@ -70,16 +56,16 @@ String.prototype.removeCharAt = function (i) {
 
 
 function interpreterOld(string) {
-    if (inputFieldOld.value === "0" && string === ".") {
-        inputFieldOld.value = "0.";
+    if (inputFieldOld.textContent === "0" && string === ".") {
+        inputFieldOld.textContent = "0.";
     }
-    else if (inputFieldOld.value === "0" && /^[0-9]$/.test(string)) {
-        inputFieldOld.value = string; 
+    else if (inputFieldOld.textContent === "0" && /^[0-9]$/.test(string)) {
+        inputFieldOld.textContent = string; 
     }       
     else if ((dotBefore === 1 || operatorBefore === 1) && 
             (string === "+" || string === "!" || string === "-" || 
             string === "*" || string === "/" || string === "^" || string === ".")) {
-           inputFieldOld.value = inputFieldOld.value.replace(/.$/,string);
+           inputFieldOld.textContent = inputFieldOld.textContent.replace(/.$/,string);
          }
     else if (string === "=" && (store1 === "" || store2 === "" || store2 === undefined)) {
 
@@ -90,12 +76,12 @@ function interpreterOld(string) {
     }
     
     else if (keyOld === false) {
-        inputFieldOld.value += string;
+        inputFieldOld.textContent += string;
     }
     keyOld = false;
     if(string === "!") {
-        inputFieldOld.value = operate("!",parseFloat(store1),parseFloat(store2));
-        store1 = inputFieldOld.value;
+        inputFieldOld.textContent = operate("!",parseFloat(store1),parseFloat(store2));
+        store1 = inputFieldOld.textContent;
         operator = "";
     }
     if(string === "+" || string === "-" || 
@@ -121,14 +107,14 @@ function interpreterOld(string) {
                             newStore1 = store1.slice(store1.search(/[*\/+\-^]/)+1);
                         }
                         
-                        inputFieldOld.value = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
+                        inputFieldOld.textContent = operate(operator,parseFloat(newStore2),parseFloat(newStore1));
                        
 
-                        if (decimalPlaces(inputFieldOld.value) > 3) {
-                            inputFieldOld.value = round(inputFieldOld.value, 3) }
-                        store1 = inputFieldOld.value;
+                        if (decimalPlaces(inputFieldOld.textContent) > 3) {
+                            inputFieldOld.textContent = round(inputFieldOld.textContent, 3) }
+                        store1 = inputFieldOld.textContent;
                         if (string === "=") {}
-                        else {inputFieldOld.value += string;
+                        else {inputFieldOld.textContent += string;
                             reset = 1;}
                     } 
                 }
@@ -145,7 +131,7 @@ function interpreterOld(string) {
         else operatorBefore = 1;
     }
     else if (reset === 1) {
-        store1 = inputFieldOld.value;
+        store1 = inputFieldOld.textContent;
         reset = 0;
         operatorBefore = 0;
     }
@@ -155,7 +141,7 @@ function interpreterOld(string) {
     }
     else if (string === '.' && store1.search(/\./) >= 0) {}
     else {
-        store1 = inputFieldOld.value;
+        store1 = inputFieldOld.textContent;
         operatorBefore = 0;
     }
     if (operatorBefore === 1) {
@@ -185,7 +171,7 @@ function decimalPlaces(num) {
 
 function backspace() {
     store1 = store1.slice(0, -1);
-    inputFieldOld.value = inputFieldOld.value.slice(0, -1);
+    inputFieldOld.textContent = inputFieldOld.textContent.slice(0, -1);
     operatorBefore = 0;
     inputFieldOld.focus();
 }

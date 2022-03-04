@@ -271,19 +271,22 @@ let outputtext = document.getElementById('status');
 
 input.addEventListener('change',function(){
     if(this.checked) {
-        outputtext.innerHTML = "Style: Calculator with Input Field";
-        document.getElementById('new').style.display = 'none';
-        document.getElementById('old').style.display = 'inline';
+        outputtext.innerHTML = "Style: Calculator";
+        // document.getElementById('new').style.display = 'none';
+        // document.getElementById('old').style.display = 'inline';
         document.getElementById('results-inner').style.display = 'none';
         document.getElementById('results-inner').textContent = '';
         document.removeEventListener('keydown', addingMachineKeyboard);
+        document.addEventListener('keydown', calculatorEvent)
         reset2();
-        document.getElementById('old').focus();
+        // document.getElementById('old').focus();
+        inputField.focus();
     } else {
         outputtext.innerHTML = "Style: Electronic Adding Machine";
-        document.getElementById('old').style.display = 'none';
-        document.getElementById('new').style.display = 'block';
+        // document.getElementById('old').style.display = 'none';
+        // document.getElementById('new').style.display = 'block';
         document.getElementById('results-inner').style.display = 'flex';
+        document.removeEventListener('keydown', calculatorEvent)
         document.addEventListener('keydown', addingMachineKeyboard);
         reset2();
         inputField.focus();
