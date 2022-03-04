@@ -292,9 +292,6 @@ input.addEventListener('change',function(){
 });
 
 
-// Create a switch that switches between calculator and addingmachine. Put the switch maybe below the calculator alltogether (easiest way), center it, 
-// default option: adding machine, other option: calculator with old code and display input field.
-
 // maybe remove input field completely, also from calculator version. It's too error-prone. 
 
 // Use comma instead of dot for adding machine? Or just seperate big numbers with comma and keep dot for fractions. Check in adding machine video what is 
