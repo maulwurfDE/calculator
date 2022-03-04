@@ -1,22 +1,3 @@
-
-
-function addEvent(elem, event, fn){
-    if(elem.addEventListener){
-      elem.addEventListener(event, fn, false);
-    } else{
-      elem.attachEvent("on" + event,
-      function(){ return(fn.call(elem, window.event)); });
-    }}
-    var element = document.getElementById('new');
-    addEvent(element,'focus',function(){
-      var that = this;
-      setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
-    });
-    addEvent(element,'click',function(){
-        var that = this;
-        setTimeout(function(){ that.selectionStart = that.selectionEnd = 10000; }, 0);
-      });
-
 let inputFieldOld = document.getElementById("new");
 let keyOld = false;
 
@@ -45,13 +26,6 @@ function calculatorEvent (e) {
         interpreterOld('.');
     }
     
-}
-
-
-String.prototype.removeCharAt = function (i) {
-    var tmp = this.split(''); // convert to an array
-    tmp.splice(i - 1 , 1); // remove 1 element from the array (adjusting for non-zero-indexed counts)
-    return tmp.join(''); // reconstruct the string
 }
 
 
@@ -149,29 +123,5 @@ function interpreterOld(string) {
     }
     if (string === ".") {dotBefore = 1;}
     else {dotBefore = 0;}
-    inputFieldOld.focus();
-}
-
-function round(value, decimals) {
-    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-}
-
-function decimalPlaces(num) {
-    var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
-    if (!match) { return 0; }
-    return Math.max(
-         0,
-         // Number of digits right of decimal point.
-         (match[1] ? match[1].length : 0)
-         // Adjust for scientific notation.
-         - (match[2] ? +match[2] : 0));
-}
-
-
-
-function backspace() {
-    store1 = store1.slice(0, -1);
-    inputFieldOld.textContent = inputFieldOld.textContent.slice(0, -1);
-    operatorBefore = 0;
     inputFieldOld.focus();
 }
