@@ -4,7 +4,7 @@ Create a basic calculator including different mathematical operations, keyboard 
 
 ## Demo
 
-[Demo](https://nearmint.github.io/calculator)
+[Demo](https://maulwurfde.github.io/calculator)
 
 ## Built with
 
